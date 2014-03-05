@@ -1,3 +1,6 @@
+//declare variables
+//url is the base url for Yahoo's RSS feed
+//woeid is the location I'm using
 String url = "http://weather.yahooapis.com/forecastrss?w=";
 String woeid = "2518192";
 String city, region, country;
@@ -9,11 +12,16 @@ String[] codes = {
 };
 
 void setup() {
+  //declare an XML object and load the URL we want for the weather forecast
   XML xml;
   xml = loadXML(url+woeid);
+  
+  //Create XML objects for each part of the feed we want to access
   XML location = xml.getChild("channel/yweather:location");
   XML astronomy = xml.getChild("channel/yweather:astronomy");
   XML current = xml.getChild("channel/item/yweather:condition");
+  
+  //use getInt() and getString() to access information from the XML objects
   city = location.getString("city");
   region = location.getString("region");
   country = location.getString("country");
